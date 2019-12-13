@@ -1,4 +1,3 @@
-import docker
 from .command import Command
 from server.master_server import MasterServer
 
@@ -15,15 +14,11 @@ class Master(Command):
     def run(self):
         print("Master command run")
 
-        # create docker container to run master
-        client = docker.from_env()
-        master_container = client.containers.run(image='dfs_master', 
-                                                command=['python3', '/root/dfs/create_master.py'])
+        # TODO: create different process to run master
         
-        print(master_container.logs())
         # master_address, peers = self._check_peers()
         # master_server = MasterServer()
-        
+         
         
 
     @property
