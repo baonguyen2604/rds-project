@@ -6,7 +6,7 @@
 
 class Command():
     name = "BaseCommand"
-
+    response = ""
     def __init__(self, args):
         pass
 

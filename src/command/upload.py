@@ -3,7 +3,9 @@ import grpc
 import proto.master_pb.master_pb2 as master_pb2
 import proto.master_pb.master_pb2_grpc as master_pb2_grpc
 from .command import Command
+import zmq
 
+FILE_PORT = 5002
 class Upload(Command):
     name = "UploadCommand"
 
@@ -14,6 +16,7 @@ class Upload(Command):
         self.files = {}
 
     def run(self):
+        self._downloadFiles()
         self._getAllFiles()
         self._submitFiles()
 
@@ -21,6 +24,21 @@ class Upload(Command):
     def description(self):
         print("Upload description")
     
+    def _downloadFiles(self):
+        context = zmq.Context()
+        subscriber = context.socket(zmq.SUB)
+        subscriber.setsockopt(zmq.SUBSCRIBE, self.path.encode())
+        subscriber.connect("tcp://127.0.0.1:5200")
+        totalSize = 0
+        f = open(self.path, "a")
+        while True:
+            path, message = subscriber.recv_multipart()
+            f.write(message.decode())
+            size = len(message)
+            totalSize += size
+            if size == 0:
+                break
+            
     def _getAllFiles(self):
         for root, dirs, files in os.walk(self.path):
             for filename in files:
