@@ -2,6 +2,7 @@ import zmq
 import pickle
 from command.master import Master
 from command.upload import Upload
+from command.volume import Volume
 
 SERVER_PORT = 5000
 
@@ -11,6 +12,8 @@ def DistributedFileSystem(args):
         command = Master(args)
     elif args.command == 'upload':
         command = Upload(args)
+    elif args.command == 'volume':
+        command = Volume(args)
         
     command.run()
     
@@ -18,7 +21,7 @@ def DistributedFileSystem(args):
 def FileSystemServer():
     context = zmq.Context()
     socket = context.socket(zmq.REP)
-    socket.bind("tcp://127.0.0.1:%s" % SERVER_PORT)
+    socket.bind("tcp://*:%s" % SERVER_PORT)
 
     while True:
         message = socket.recv()

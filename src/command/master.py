@@ -12,11 +12,10 @@ class Master(Command):
     def run(self):
         print("Master command run")
 
-        # TODO: create different process to run master
+        # create different process to run master
         process = mp.Process(target=create_master.master, args=(self.args,))
         process.start()
         process.join()
-        
 
     @property
     def description(self):

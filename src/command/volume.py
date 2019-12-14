@@ -1,19 +1,21 @@
 from .command import Command
+import create_volume
+import multiprocessing as mp
 
-def Volume(Command):
+class Volume(Command):
     name = "VolumeCommand"
 
     def __init__(self, args=None):
         Command.__init__(self, args)
-        self.options = {}
-        self.options['ip'] = args.ip
-        self.options['port'] = args.port
-        self.options['grpc_port'] = args.grpc_port
+        self.args = args
 
     def run(self):
         print("Volume command run")
 
-        # TODO: Create a separate process to run volume
+        # Create a separate process to run volume
+        process = mp.Process(target=create_volume.volume, args=(self.args,))
+        process.start()
+        process.join()
 
     @property
     def description(self):

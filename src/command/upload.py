@@ -1,4 +1,5 @@
 import os
+import grpc
 import proto.master_pb.master_pb2 as master_pb2
 import proto.master_pb.master_pb2_grpc as master_pb2_grpc
 from .command import Command
@@ -9,6 +10,7 @@ class Upload(Command):
     def __init__(self, args=None):
         Command.__init__(self, args)
         self.path = args.path
+        self.master_addr = args.master
         self.files = {}
 
     def run(self):
@@ -27,12 +29,14 @@ class Upload(Command):
                     file_content = file.read()
                     self.files[fullpath] = file_content
 
-    def _submitFiles(self, master):
+    def _submitFiles(self):
         assign_request = master_pb2.AssignRequest(
             count=len(self.files)
             )
         
-        with grpc.insecure_channel(master) as channel:
+        print(self.master_addr)
+        with grpc.insecure_channel(self.master_addr) as channel:
             master_client = master_pb2_grpc.MasterNodeStub(channel)
-            master_client.Assign()
+
+            master_client.Assign(assign_request)
         

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package volume_pb;
+
+//////////////////////////////////////////////////
+
+service VolumeNode {
+    rpc AllocateVolume (AllocateVolumeRequest) returns (AllocateVolumeResponse) {
+
+    }
+
+    rpc UploadFile (stream UploadFileChunk) returns (UploadFileResponse) {
+
+    }
+}
+
+message AllocateVolumeRequest {
+    uint32 volume_id = 1;
+}
+
+message AllocateVolumeResponse {
+
+}
+
+message UploadFileChunk {
+    bytes content = 1;
+}
+
+enum UploadStatusCode {
+    unknown = 0;
+    success = 1;
+    failed = 2;
+}
+
+message UploadFileResponse {
+    string message = 1;
+    UploadStatusCode response_code = 2;
+}
