@@ -2,6 +2,7 @@ from concurrent import futures
 import grpc
 import proto.master_pb.master_pb2 as master_pb2
 import proto.master_pb.master_pb2_grpc as master_pb2_grpc
+import mysql.connector
 
 class MasterServer(master_pb2_grpc.MasterNodeServicer):
     def __init__(self, args=None):
@@ -29,3 +30,14 @@ def serve(args):
     grpc_server.start()
     grpc_server.wait_for_termination()
 
+def createDB(name):
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+    )
+    mycursor = mydb.cursor()
+    mycursor.execute("CREATE DATABASE IF NOT EXISTS filesystem")
+    mycursor.execute("USE filesystem")
+    mycursor.execute("DROP TABLE IF EXISTS %s" % name)
+    mycursor.execute("CREATE TABLE %s (id INT AUTO_INCREMENT PRIMARY KEY, " % name
+            + "path VARCHAR(255), volumeId INT, size INT)")

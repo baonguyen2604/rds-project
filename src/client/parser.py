@@ -19,6 +19,7 @@ def add_master_parse(parser):
     parser.add_argument("-p", "--port", type=int, help="port to talk to master", default=12000)
     parser.add_argument("-ip", help="ip of master", default="localhost")
     parser.add_argument("-gp", "--grpc-port", help="grpc port for master", default='12001')
+    parser.add_argument("-n", "--name", help="name of filesystem", default='dfs')
 
 def add_upload_parse(parser):
     parser.add_argument("-p", "--path", help="path to upload to file system", default='.')

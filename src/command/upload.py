@@ -32,13 +32,22 @@ class Upload(Command):
         subscriber.connect("tcp://127.0.0.1:%s" % FILE_PORT)
         totalSize = 0
         f = open(self.path, "w")
+
         while True:
-            path, message = subscriber.recv_multipart()
+            try:
+                path, message = subscriber.recv_multipart()
+            except zmq.ZMQError as e:
+                # File upload failed
+                f.close();
+                os.remove(self.path)
+                return "Failed"
+                
             f.write(message.decode())
             size = len(message)
             totalSize += size
             if size == 0:
                 break
+        f.close()
         message = "File Successfully Uploaded: %d Bytes" % totalSize
         return message
             
