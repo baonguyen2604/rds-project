@@ -1,4 +1,3 @@
-import parser
 import zmq
 import pickle
 from command.master import Master
@@ -17,9 +16,9 @@ def DistributedFileSystem(args):
     
 
 def FileSystemServer():
-    context = zmq.Content()
+    context = zmq.Context()
     socket = context.socket(zmq.REP)
-    socket.bind("tcp://%s" % SERVER_PORT)
+    socket.bind("tcp://127.0.0.1:%s" % SERVER_PORT)
 
     while True:
         message = socket.recv()
