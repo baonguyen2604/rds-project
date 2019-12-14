@@ -1,6 +1,10 @@
 import parser
+import zmq
+import pickle
 from command.master import Master
 from command.upload import Upload
+
+SERVER_PORT = 5000
 
 def DistributedFileSystem(args):
     command = None
@@ -10,9 +14,18 @@ def DistributedFileSystem(args):
         command = Upload(args)
         
     command.run()
+    
+
+def FileSystemServer():
+    context = zmq.Content()
+    socket = context.socket(zmq.REP)
+    socket.bind("tcp://%s" % SERVER_PORT)
+
+    while True:
+        message = socket.recv()
+        args = pickle.loads(message)
+        DistributedFileSystem(args)
+
 
 if __name__ == '__main__':
-    parser = parser.main_parser()
-    args = parser.parse_args()
-
-    DistributedFileSystem(args)
+    FileSystemServer()

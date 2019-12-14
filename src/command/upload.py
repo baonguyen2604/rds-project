@@ -27,7 +27,12 @@ class Upload(Command):
                     file_content = file.read()
                     self.files[fullpath] = file_content
 
-    def _submitFiles(self):
+    def _submitFiles(self, master):
         assign_request = master_pb2.AssignRequest(
             count=len(self.files)
             )
+        
+        with grpc.insecure_channel(master) as channel:
+            master_client = master_pb2_grpc.MasterNodeStub(channel)
+            master_client.Assign()
+        
