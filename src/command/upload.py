@@ -34,9 +34,7 @@ class Upload(Command):
             count=len(self.files)
             )
         
-        print(self.master_addr)
         with grpc.insecure_channel(self.master_addr) as channel:
             master_client = master_pb2_grpc.MasterNodeStub(channel)
-
             master_client.Assign(assign_request)
         

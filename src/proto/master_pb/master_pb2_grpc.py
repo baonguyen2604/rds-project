@@ -15,16 +15,6 @@ class MasterNodeStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.SendHeartbeat = channel.stream_stream(
-        '/master_pb.MasterNode/SendHeartbeat',
-        request_serializer=master__pb2.Heartbeat.SerializeToString,
-        response_deserializer=master__pb2.HeartbeatResponse.FromString,
-        )
-    self.KeepConnected = channel.stream_stream(
-        '/master_pb.MasterNode/KeepConnected',
-        request_serializer=master__pb2.KeepConnectedRequest.SerializeToString,
-        response_deserializer=master__pb2.VolumeLocation.FromString,
-        )
     self.LookupVolume = channel.unary_unary(
         '/master_pb.MasterNode/LookupVolume',
         request_serializer=master__pb2.LookupVolumeRequest.SerializeToString,
@@ -40,26 +30,17 @@ class MasterNodeStub(object):
         request_serializer=master__pb2.VolumeListRequest.SerializeToString,
         response_deserializer=master__pb2.VolumeListResponse.FromString,
         )
+    self.AddVolume = channel.unary_unary(
+        '/master_pb.MasterNode/AddVolume',
+        request_serializer=master__pb2.AddVolumeRequest.SerializeToString,
+        response_deserializer=master__pb2.AddVolumeResponse.FromString,
+        )
 
 
 class MasterNodeServicer(object):
   """////////////////////////////////////////////
 
   """
-
-  def SendHeartbeat(self, request_iterator, context):
-    # missing associated documentation comment in .proto file
-    pass
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def KeepConnected(self, request_iterator, context):
-    # missing associated documentation comment in .proto file
-    pass
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
 
   def LookupVolume(self, request, context):
     # missing associated documentation comment in .proto file
@@ -82,19 +63,16 @@ class MasterNodeServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def AddVolume(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_MasterNodeServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'SendHeartbeat': grpc.stream_stream_rpc_method_handler(
-          servicer.SendHeartbeat,
-          request_deserializer=master__pb2.Heartbeat.FromString,
-          response_serializer=master__pb2.HeartbeatResponse.SerializeToString,
-      ),
-      'KeepConnected': grpc.stream_stream_rpc_method_handler(
-          servicer.KeepConnected,
-          request_deserializer=master__pb2.KeepConnectedRequest.FromString,
-          response_serializer=master__pb2.VolumeLocation.SerializeToString,
-      ),
       'LookupVolume': grpc.unary_unary_rpc_method_handler(
           servicer.LookupVolume,
           request_deserializer=master__pb2.LookupVolumeRequest.FromString,
@@ -109,6 +87,11 @@ def add_MasterNodeServicer_to_server(servicer, server):
           servicer.VolumeList,
           request_deserializer=master__pb2.VolumeListRequest.FromString,
           response_serializer=master__pb2.VolumeListResponse.SerializeToString,
+      ),
+      'AddVolume': grpc.unary_unary_rpc_method_handler(
+          servicer.AddVolume,
+          request_deserializer=master__pb2.AddVolumeRequest.FromString,
+          response_serializer=master__pb2.AddVolumeResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

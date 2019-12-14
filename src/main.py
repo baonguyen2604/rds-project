@@ -15,7 +15,9 @@ def DistributedFileSystem(args):
     elif args.command == 'volume':
         command = Volume(args)
         
-    command.run()
+    resp = command.run()
+
+    return resp
     
 
 def FileSystemServer():
@@ -26,7 +28,8 @@ def FileSystemServer():
     while True:
         message = socket.recv()
         args = pickle.loads(message)
-        DistributedFileSystem(args)
+        resp = DistributedFileSystem(args)
+        socket.send_string(resp)
 
 
 if __name__ == '__main__':

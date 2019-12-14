@@ -11,7 +11,7 @@ class Command():
         pass
 
     def run(self):
-        pass
+        return ""
 
     @property
     def description(self):

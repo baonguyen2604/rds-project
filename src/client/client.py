@@ -12,6 +12,8 @@ def Client():
     args = clientParser.parse_args()
     pArgs = pickle.dumps(args)
     socket.send(pArgs)
+    resp = socket.recv_string()
+    print(resp)
 
 # Client Process, uses ZMQ to communicate to Main.py
 if __name__ == '__main__':

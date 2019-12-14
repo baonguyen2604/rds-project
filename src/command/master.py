@@ -15,7 +15,8 @@ class Master(Command):
         # create different process to run master
         process = mp.Process(target=create_master.master, args=(self.args,))
         process.start()
-        process.join()
+
+        return "Started master at %s:%d and GRPC port = %s" %(self.args.ip, self.args.port, self.args.grpc_port)
 
     @property
     def description(self):

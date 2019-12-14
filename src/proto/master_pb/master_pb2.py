@@ -20,263 +20,36 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='master_pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0cmaster.proto\x12\tmaster_pb\"\xdc\x02\n\tHeartbeat\x12\n\n\x02ip\x18\x01 \x01(\t\x12\x0c\n\x04port\x18\x02 \x01(\r\x12\x18\n\x10max_volume_count\x18\x04 \x01(\r\x12\x14\n\x0cmax_file_key\x18\x05 \x01(\x04\x12\x13\n\x0b\x64\x61ta_center\x18\x06 \x01(\t\x12\x0c\n\x04rack\x18\x07 \x01(\t\x12\x12\n\nadmin_port\x18\x08 \x01(\r\x12\x34\n\x07volumes\x18\t \x03(\x0b\x32#.master_pb.VolumeInformationMessage\x12=\n\x0bnew_volumes\x18\n \x03(\x0b\x32(.master_pb.VolumeShortInformationMessage\x12\x41\n\x0f\x64\x65leted_volumes\x18\x0b \x03(\x0b\x32(.master_pb.VolumeShortInformationMessage\x12\x16\n\x0ehas_no_volumes\x18\x0c \x01(\x08\">\n\x11HeartbeatResponse\x12\x19\n\x11volume_size_limit\x18\x01 \x01(\x04\x12\x0e\n\x06leader\x18\x02 \x01(\t\"q\n\x18VolumeInformationMessage\x12\n\n\x02id\x18\x01 \x01(\r\x12\x0c\n\x04size\x18\x02 \x01(\x04\x12\x12\n\nfile_count\x18\x04 \x01(\x04\x12\x14\n\x0c\x64\x65lete_count\x18\x05 \x01(\x04\x12\x11\n\tread_only\x18\x07 \x01(\x08\"+\n\x1dVolumeShortInformationMessage\x12\n\n\x02id\x18\x01 \x01(\r\"\x07\n\x05\x45mpty\"$\n\x14KeepConnectedRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"1\n\x0eVolumeLocation\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x12\n\npublic_url\x18\x02 \x01(\t\")\n\x13LookupVolumeRequest\x12\x12\n\nvolume_ids\x18\x01 \x03(\t\"\xc3\x01\n\x14LookupVolumeResponse\x12M\n\x13volume_id_locations\x18\x01 \x03(\x0b\x32\x30.master_pb.LookupVolumeResponse.VolumeIdLocation\x1a\\\n\x10VolumeIdLocation\x12\x11\n\tvolume_id\x18\x01 \x01(\t\x12&\n\tlocations\x18\x02 \x03(\x0b\x32\x13.master_pb.Location\x12\r\n\x05\x65rror\x18\x03 \x01(\t\"+\n\x08Location\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x12\n\npublic_url\x18\x02 \x01(\t\"\x8a\x01\n\rAssignRequest\x12\r\n\x05\x63ount\x18\x01 \x01(\x04\x12\x13\n\x0breplication\x18\x02 \x01(\t\x12\x12\n\ncollection\x18\x03 \x01(\t\x12\x0b\n\x03ttl\x18\x04 \x01(\t\x12\x13\n\x0b\x64\x61ta_center\x18\x05 \x01(\t\x12\x0c\n\x04rack\x18\x06 \x01(\t\x12\x11\n\tdata_node\x18\x07 \x01(\t\"\\\n\x0e\x41ssignResponse\x12\x0b\n\x03\x66id\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x12\n\npublic_url\x18\x03 \x01(\t\x12\r\n\x05\x63ount\x18\x04 \x01(\x04\x12\r\n\x05\x65rror\x18\x05 \x01(\t\"\x13\n\x11VolumeListRequest\"\x14\n\x12VolumeListResponse2\x8b\x03\n\nMasterNode\x12I\n\rSendHeartbeat\x12\x14.master_pb.Heartbeat\x1a\x1c.master_pb.HeartbeatResponse\"\x00(\x01\x30\x01\x12Q\n\rKeepConnected\x12\x1f.master_pb.KeepConnectedRequest\x1a\x19.master_pb.VolumeLocation\"\x00(\x01\x30\x01\x12Q\n\x0cLookupVolume\x12\x1e.master_pb.LookupVolumeRequest\x1a\x1f.master_pb.LookupVolumeResponse\"\x00\x12?\n\x06\x41ssign\x12\x18.master_pb.AssignRequest\x1a\x19.master_pb.AssignResponse\"\x00\x12K\n\nVolumeList\x12\x1c.master_pb.VolumeListRequest\x1a\x1d.master_pb.VolumeListResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0cmaster.proto\x12\tmaster_pb\"$\n\x14KeepConnectedRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"1\n\x0eVolumeLocation\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x12\n\npublic_url\x18\x02 \x01(\t\")\n\x13LookupVolumeRequest\x12\x12\n\nvolume_ids\x18\x01 \x03(\t\"\xc3\x01\n\x14LookupVolumeResponse\x12M\n\x13volume_id_locations\x18\x01 \x03(\x0b\x32\x30.master_pb.LookupVolumeResponse.VolumeIdLocation\x1a\\\n\x10VolumeIdLocation\x12\x11\n\tvolume_id\x18\x01 \x01(\t\x12&\n\tlocations\x18\x02 \x03(\x0b\x32\x13.master_pb.Location\x12\r\n\x05\x65rror\x18\x03 \x01(\t\"+\n\x08Location\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x12\n\npublic_url\x18\x02 \x01(\t\"\x8a\x01\n\rAssignRequest\x12\r\n\x05\x63ount\x18\x01 \x01(\x04\x12\x13\n\x0breplication\x18\x02 \x01(\t\x12\x12\n\ncollection\x18\x03 \x01(\t\x12\x0b\n\x03ttl\x18\x04 \x01(\t\x12\x13\n\x0b\x64\x61ta_center\x18\x05 \x01(\t\x12\x0c\n\x04rack\x18\x06 \x01(\t\x12\x11\n\tdata_node\x18\x07 \x01(\t\"\\\n\x0e\x41ssignResponse\x12\x0b\n\x03\x66id\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x12\n\npublic_url\x18\x03 \x01(\t\x12\r\n\x05\x63ount\x18\x04 \x01(\x04\x12\r\n\x05\x65rror\x18\x05 \x01(\t\"\x13\n\x11VolumeListRequest\"\x14\n\x12VolumeListResponse\":\n\x10\x41\x64\x64VolumeRequest\x12\x11\n\tvolume_id\x18\x01 \x01(\r\x12\x13\n\x0bvolume_grpc\x18\x02 \x01(\t\"\xa3\x01\n\x11\x41\x64\x64VolumeResponse\x12I\n\rresponse_code\x18\x01 \x01(\x0e\x32\x32.master_pb.AddVolumeResponse.AddVolumeResponseCode\"C\n\x15\x41\x64\x64VolumeResponseCode\x12\x0b\n\x07unknown\x10\x00\x12\x0b\n\x07success\x10\x01\x12\x10\n\x0c\x64uplicate_id\x10\x02\x32\xb7\x02\n\nMasterNode\x12Q\n\x0cLookupVolume\x12\x1e.master_pb.LookupVolumeRequest\x1a\x1f.master_pb.LookupVolumeResponse\"\x00\x12?\n\x06\x41ssign\x12\x18.master_pb.AssignRequest\x1a\x19.master_pb.AssignResponse\"\x00\x12K\n\nVolumeList\x12\x1c.master_pb.VolumeListRequest\x1a\x1d.master_pb.VolumeListResponse\"\x00\x12H\n\tAddVolume\x12\x1b.master_pb.AddVolumeRequest\x1a\x1c.master_pb.AddVolumeResponse\"\x00\x62\x06proto3')
 )
 
 
 
-
-_HEARTBEAT = _descriptor.Descriptor(
-  name='Heartbeat',
-  full_name='master_pb.Heartbeat',
+_ADDVOLUMERESPONSE_ADDVOLUMERESPONSECODE = _descriptor.EnumDescriptor(
+  name='AddVolumeResponseCode',
+  full_name='master_pb.AddVolumeResponse.AddVolumeResponseCode',
   filename=None,
   file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='unknown', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='success', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='duplicate_id', index=2, number=2,
+      serialized_options=None,
+      type=None),
+  ],
   containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ip', full_name='master_pb.Heartbeat.ip', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='port', full_name='master_pb.Heartbeat.port', index=1,
-      number=2, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='max_volume_count', full_name='master_pb.Heartbeat.max_volume_count', index=2,
-      number=4, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='max_file_key', full_name='master_pb.Heartbeat.max_file_key', index=3,
-      number=5, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='data_center', full_name='master_pb.Heartbeat.data_center', index=4,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='rack', full_name='master_pb.Heartbeat.rack', index=5,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='admin_port', full_name='master_pb.Heartbeat.admin_port', index=6,
-      number=8, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='volumes', full_name='master_pb.Heartbeat.volumes', index=7,
-      number=9, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='new_volumes', full_name='master_pb.Heartbeat.new_volumes', index=8,
-      number=10, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='deleted_volumes', full_name='master_pb.Heartbeat.deleted_volumes', index=9,
-      number=11, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='has_no_volumes', full_name='master_pb.Heartbeat.has_no_volumes', index=10,
-      number=12, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
   serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=28,
-  serialized_end=376,
+  serialized_start=837,
+  serialized_end=904,
 )
-
-
-_HEARTBEATRESPONSE = _descriptor.Descriptor(
-  name='HeartbeatResponse',
-  full_name='master_pb.HeartbeatResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='volume_size_limit', full_name='master_pb.HeartbeatResponse.volume_size_limit', index=0,
-      number=1, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='leader', full_name='master_pb.HeartbeatResponse.leader', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=378,
-  serialized_end=440,
-)
-
-
-_VOLUMEINFORMATIONMESSAGE = _descriptor.Descriptor(
-  name='VolumeInformationMessage',
-  full_name='master_pb.VolumeInformationMessage',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='id', full_name='master_pb.VolumeInformationMessage.id', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='size', full_name='master_pb.VolumeInformationMessage.size', index=1,
-      number=2, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='file_count', full_name='master_pb.VolumeInformationMessage.file_count', index=2,
-      number=4, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='delete_count', full_name='master_pb.VolumeInformationMessage.delete_count', index=3,
-      number=5, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='read_only', full_name='master_pb.VolumeInformationMessage.read_only', index=4,
-      number=7, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=442,
-  serialized_end=555,
-)
-
-
-_VOLUMESHORTINFORMATIONMESSAGE = _descriptor.Descriptor(
-  name='VolumeShortInformationMessage',
-  full_name='master_pb.VolumeShortInformationMessage',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='id', full_name='master_pb.VolumeShortInformationMessage.id', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=557,
-  serialized_end=600,
-)
-
-
-_EMPTY = _descriptor.Descriptor(
-  name='Empty',
-  full_name='master_pb.Empty',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=602,
-  serialized_end=609,
-)
+_sym_db.RegisterEnumDescriptor(_ADDVOLUMERESPONSE_ADDVOLUMERESPONSECODE)
 
 
 _KEEPCONNECTEDREQUEST = _descriptor.Descriptor(
@@ -305,8 +78,8 @@ _KEEPCONNECTEDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=611,
-  serialized_end=647,
+  serialized_start=27,
+  serialized_end=63,
 )
 
 
@@ -343,8 +116,8 @@ _VOLUMELOCATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=649,
-  serialized_end=698,
+  serialized_start=65,
+  serialized_end=114,
 )
 
 
@@ -374,8 +147,8 @@ _LOOKUPVOLUMEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=700,
-  serialized_end=741,
+  serialized_start=116,
+  serialized_end=157,
 )
 
 
@@ -419,8 +192,8 @@ _LOOKUPVOLUMERESPONSE_VOLUMEIDLOCATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=847,
-  serialized_end=939,
+  serialized_start=263,
+  serialized_end=355,
 )
 
 _LOOKUPVOLUMERESPONSE = _descriptor.Descriptor(
@@ -449,8 +222,8 @@ _LOOKUPVOLUMERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=744,
-  serialized_end=939,
+  serialized_start=160,
+  serialized_end=355,
 )
 
 
@@ -487,8 +260,8 @@ _LOCATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=941,
-  serialized_end=984,
+  serialized_start=357,
+  serialized_end=400,
 )
 
 
@@ -560,8 +333,8 @@ _ASSIGNREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=987,
-  serialized_end=1125,
+  serialized_start=403,
+  serialized_end=541,
 )
 
 
@@ -619,8 +392,8 @@ _ASSIGNRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1127,
-  serialized_end=1219,
+  serialized_start=543,
+  serialized_end=635,
 )
 
 
@@ -643,8 +416,8 @@ _VOLUMELISTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1221,
-  serialized_end=1240,
+  serialized_start=637,
+  serialized_end=656,
 )
 
 
@@ -667,21 +440,85 @@ _VOLUMELISTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1242,
-  serialized_end=1262,
+  serialized_start=658,
+  serialized_end=678,
 )
 
-_HEARTBEAT.fields_by_name['volumes'].message_type = _VOLUMEINFORMATIONMESSAGE
-_HEARTBEAT.fields_by_name['new_volumes'].message_type = _VOLUMESHORTINFORMATIONMESSAGE
-_HEARTBEAT.fields_by_name['deleted_volumes'].message_type = _VOLUMESHORTINFORMATIONMESSAGE
+
+_ADDVOLUMEREQUEST = _descriptor.Descriptor(
+  name='AddVolumeRequest',
+  full_name='master_pb.AddVolumeRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='volume_id', full_name='master_pb.AddVolumeRequest.volume_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='volume_grpc', full_name='master_pb.AddVolumeRequest.volume_grpc', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=680,
+  serialized_end=738,
+)
+
+
+_ADDVOLUMERESPONSE = _descriptor.Descriptor(
+  name='AddVolumeResponse',
+  full_name='master_pb.AddVolumeResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='response_code', full_name='master_pb.AddVolumeResponse.response_code', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _ADDVOLUMERESPONSE_ADDVOLUMERESPONSECODE,
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=741,
+  serialized_end=904,
+)
+
 _LOOKUPVOLUMERESPONSE_VOLUMEIDLOCATION.fields_by_name['locations'].message_type = _LOCATION
 _LOOKUPVOLUMERESPONSE_VOLUMEIDLOCATION.containing_type = _LOOKUPVOLUMERESPONSE
 _LOOKUPVOLUMERESPONSE.fields_by_name['volume_id_locations'].message_type = _LOOKUPVOLUMERESPONSE_VOLUMEIDLOCATION
-DESCRIPTOR.message_types_by_name['Heartbeat'] = _HEARTBEAT
-DESCRIPTOR.message_types_by_name['HeartbeatResponse'] = _HEARTBEATRESPONSE
-DESCRIPTOR.message_types_by_name['VolumeInformationMessage'] = _VOLUMEINFORMATIONMESSAGE
-DESCRIPTOR.message_types_by_name['VolumeShortInformationMessage'] = _VOLUMESHORTINFORMATIONMESSAGE
-DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
+_ADDVOLUMERESPONSE.fields_by_name['response_code'].enum_type = _ADDVOLUMERESPONSE_ADDVOLUMERESPONSECODE
+_ADDVOLUMERESPONSE_ADDVOLUMERESPONSECODE.containing_type = _ADDVOLUMERESPONSE
 DESCRIPTOR.message_types_by_name['KeepConnectedRequest'] = _KEEPCONNECTEDREQUEST
 DESCRIPTOR.message_types_by_name['VolumeLocation'] = _VOLUMELOCATION
 DESCRIPTOR.message_types_by_name['LookupVolumeRequest'] = _LOOKUPVOLUMEREQUEST
@@ -691,42 +528,9 @@ DESCRIPTOR.message_types_by_name['AssignRequest'] = _ASSIGNREQUEST
 DESCRIPTOR.message_types_by_name['AssignResponse'] = _ASSIGNRESPONSE
 DESCRIPTOR.message_types_by_name['VolumeListRequest'] = _VOLUMELISTREQUEST
 DESCRIPTOR.message_types_by_name['VolumeListResponse'] = _VOLUMELISTRESPONSE
+DESCRIPTOR.message_types_by_name['AddVolumeRequest'] = _ADDVOLUMEREQUEST
+DESCRIPTOR.message_types_by_name['AddVolumeResponse'] = _ADDVOLUMERESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
-Heartbeat = _reflection.GeneratedProtocolMessageType('Heartbeat', (_message.Message,), {
-  'DESCRIPTOR' : _HEARTBEAT,
-  '__module__' : 'master_pb2'
-  # @@protoc_insertion_point(class_scope:master_pb.Heartbeat)
-  })
-_sym_db.RegisterMessage(Heartbeat)
-
-HeartbeatResponse = _reflection.GeneratedProtocolMessageType('HeartbeatResponse', (_message.Message,), {
-  'DESCRIPTOR' : _HEARTBEATRESPONSE,
-  '__module__' : 'master_pb2'
-  # @@protoc_insertion_point(class_scope:master_pb.HeartbeatResponse)
-  })
-_sym_db.RegisterMessage(HeartbeatResponse)
-
-VolumeInformationMessage = _reflection.GeneratedProtocolMessageType('VolumeInformationMessage', (_message.Message,), {
-  'DESCRIPTOR' : _VOLUMEINFORMATIONMESSAGE,
-  '__module__' : 'master_pb2'
-  # @@protoc_insertion_point(class_scope:master_pb.VolumeInformationMessage)
-  })
-_sym_db.RegisterMessage(VolumeInformationMessage)
-
-VolumeShortInformationMessage = _reflection.GeneratedProtocolMessageType('VolumeShortInformationMessage', (_message.Message,), {
-  'DESCRIPTOR' : _VOLUMESHORTINFORMATIONMESSAGE,
-  '__module__' : 'master_pb2'
-  # @@protoc_insertion_point(class_scope:master_pb.VolumeShortInformationMessage)
-  })
-_sym_db.RegisterMessage(VolumeShortInformationMessage)
-
-Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
-  'DESCRIPTOR' : _EMPTY,
-  '__module__' : 'master_pb2'
-  # @@protoc_insertion_point(class_scope:master_pb.Empty)
-  })
-_sym_db.RegisterMessage(Empty)
 
 KeepConnectedRequest = _reflection.GeneratedProtocolMessageType('KeepConnectedRequest', (_message.Message,), {
   'DESCRIPTOR' : _KEEPCONNECTEDREQUEST,
@@ -799,6 +603,20 @@ VolumeListResponse = _reflection.GeneratedProtocolMessageType('VolumeListRespons
   })
 _sym_db.RegisterMessage(VolumeListResponse)
 
+AddVolumeRequest = _reflection.GeneratedProtocolMessageType('AddVolumeRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ADDVOLUMEREQUEST,
+  '__module__' : 'master_pb2'
+  # @@protoc_insertion_point(class_scope:master_pb.AddVolumeRequest)
+  })
+_sym_db.RegisterMessage(AddVolumeRequest)
+
+AddVolumeResponse = _reflection.GeneratedProtocolMessageType('AddVolumeResponse', (_message.Message,), {
+  'DESCRIPTOR' : _ADDVOLUMERESPONSE,
+  '__module__' : 'master_pb2'
+  # @@protoc_insertion_point(class_scope:master_pb.AddVolumeResponse)
+  })
+_sym_db.RegisterMessage(AddVolumeResponse)
+
 
 
 _MASTERNODE = _descriptor.ServiceDescriptor(
@@ -807,31 +625,13 @@ _MASTERNODE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=1265,
-  serialized_end=1660,
+  serialized_start=907,
+  serialized_end=1218,
   methods=[
-  _descriptor.MethodDescriptor(
-    name='SendHeartbeat',
-    full_name='master_pb.MasterNode.SendHeartbeat',
-    index=0,
-    containing_service=None,
-    input_type=_HEARTBEAT,
-    output_type=_HEARTBEATRESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='KeepConnected',
-    full_name='master_pb.MasterNode.KeepConnected',
-    index=1,
-    containing_service=None,
-    input_type=_KEEPCONNECTEDREQUEST,
-    output_type=_VOLUMELOCATION,
-    serialized_options=None,
-  ),
   _descriptor.MethodDescriptor(
     name='LookupVolume',
     full_name='master_pb.MasterNode.LookupVolume',
-    index=2,
+    index=0,
     containing_service=None,
     input_type=_LOOKUPVOLUMEREQUEST,
     output_type=_LOOKUPVOLUMERESPONSE,
@@ -840,7 +640,7 @@ _MASTERNODE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='Assign',
     full_name='master_pb.MasterNode.Assign',
-    index=3,
+    index=1,
     containing_service=None,
     input_type=_ASSIGNREQUEST,
     output_type=_ASSIGNRESPONSE,
@@ -849,10 +649,19 @@ _MASTERNODE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='VolumeList',
     full_name='master_pb.MasterNode.VolumeList',
-    index=4,
+    index=2,
     containing_service=None,
     input_type=_VOLUMELISTREQUEST,
     output_type=_VOLUMELISTRESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='AddVolume',
+    full_name='master_pb.MasterNode.AddVolume',
+    index=3,
+    containing_service=None,
+    input_type=_ADDVOLUMEREQUEST,
+    output_type=_ADDVOLUMERESPONSE,
     serialized_options=None,
   ),
 ])

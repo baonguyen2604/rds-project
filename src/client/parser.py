@@ -29,3 +29,4 @@ def add_volume_parse(parser):
     parser.add_argument("-p", "--port", type=int, help="port to talk to volume", default=13000)
     parser.add_argument("-ip", help="ip of volume", default="localhost")
     parser.add_argument("-gp", "--grpc-port", help="grpc port for volume", default='13001')
+    parser.add_argument("--master", help="master GRPC ip address in format <ip>:<port>", default="localhost:12001")
