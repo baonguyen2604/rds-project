@@ -2,7 +2,12 @@ from concurrent import futures
 import grpc
 import proto.master_pb.master_pb2 as master_pb2
 import proto.master_pb.master_pb2_grpc as master_pb2_grpc
+import proto.volume_pb.volume_pb2 as volume_pb2
+import proto.volume_pb.volume_pb2_grpc as volume_pb2_grpc
+import zmq
 import mysql.connector
+
+FILE_PORT = 5002
 
 class MasterServer(master_pb2_grpc.MasterNodeServicer):
     def __init__(self, args=None):
@@ -21,6 +26,9 @@ class MasterServer(master_pb2_grpc.MasterNodeServicer):
             return master_pb2.AddVolumeResponse(
                 response_code=master_pb2.AddVolumeResponse.AddVolumeResponseCode.Value('success')
             )
+
+    def Upload(self, request, context):
+        pass
             
 def serve(args):
     grpc_server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

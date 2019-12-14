@@ -20,10 +20,10 @@ class MasterNodeStub(object):
         request_serializer=master__pb2.LookupVolumeRequest.SerializeToString,
         response_deserializer=master__pb2.LookupVolumeResponse.FromString,
         )
-    self.Assign = channel.unary_unary(
-        '/master_pb.MasterNode/Assign',
-        request_serializer=master__pb2.AssignRequest.SerializeToString,
-        response_deserializer=master__pb2.AssignResponse.FromString,
+    self.Upload = channel.unary_unary(
+        '/master_pb.MasterNode/Upload',
+        request_serializer=master__pb2.UploadRequest.SerializeToString,
+        response_deserializer=master__pb2.UploadResponse.FromString,
         )
     self.VolumeList = channel.unary_unary(
         '/master_pb.MasterNode/VolumeList',
@@ -49,7 +49,7 @@ class MasterNodeServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def Assign(self, request, context):
+  def Upload(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -78,10 +78,10 @@ def add_MasterNodeServicer_to_server(servicer, server):
           request_deserializer=master__pb2.LookupVolumeRequest.FromString,
           response_serializer=master__pb2.LookupVolumeResponse.SerializeToString,
       ),
-      'Assign': grpc.unary_unary_rpc_method_handler(
-          servicer.Assign,
-          request_deserializer=master__pb2.AssignRequest.FromString,
-          response_serializer=master__pb2.AssignResponse.SerializeToString,
+      'Upload': grpc.unary_unary_rpc_method_handler(
+          servicer.Upload,
+          request_deserializer=master__pb2.UploadRequest.FromString,
+          response_serializer=master__pb2.UploadResponse.SerializeToString,
       ),
       'VolumeList': grpc.unary_unary_rpc_method_handler(
           servicer.VolumeList,

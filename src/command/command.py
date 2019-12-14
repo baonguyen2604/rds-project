@@ -1,9 +1,3 @@
-# commands = [
-#     Master,
-#     Volume,
-#     Mount
-# ]
-
 class Command():
     name = "BaseCommand"
     response = ""

@@ -20,10 +20,10 @@ class VolumeNodeStub(object):
         request_serializer=volume__pb2.AllocateVolumeRequest.SerializeToString,
         response_deserializer=volume__pb2.AllocateVolumeResponse.FromString,
         )
-    self.UploadFile = channel.stream_unary(
-        '/volume_pb.VolumeNode/UploadFile',
-        request_serializer=volume__pb2.UploadFileChunk.SerializeToString,
-        response_deserializer=volume__pb2.UploadFileResponse.FromString,
+    self.WriteFile = channel.stream_unary(
+        '/volume_pb.VolumeNode/WriteFile',
+        request_serializer=volume__pb2.WriteFileChunk.SerializeToString,
+        response_deserializer=volume__pb2.WriteFileResponse.FromString,
         )
 
 
@@ -39,7 +39,7 @@ class VolumeNodeServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def UploadFile(self, request_iterator, context):
+  def WriteFile(self, request_iterator, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -54,10 +54,10 @@ def add_VolumeNodeServicer_to_server(servicer, server):
           request_deserializer=volume__pb2.AllocateVolumeRequest.FromString,
           response_serializer=volume__pb2.AllocateVolumeResponse.SerializeToString,
       ),
-      'UploadFile': grpc.stream_unary_rpc_method_handler(
-          servicer.UploadFile,
-          request_deserializer=volume__pb2.UploadFileChunk.FromString,
-          response_serializer=volume__pb2.UploadFileResponse.SerializeToString,
+      'WriteFile': grpc.stream_unary_rpc_method_handler(
+          servicer.WriteFile,
+          request_deserializer=volume__pb2.WriteFileChunk.FromString,
+          response_serializer=volume__pb2.WriteFileResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

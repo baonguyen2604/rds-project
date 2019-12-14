@@ -13,13 +13,11 @@ class Upload(Command):
         Command.__init__(self, args)
         self.path = args.path
         self.master_addr = args.master
-        self.files = {}
 
     def run(self):
         message = self._downloadFiles()
+        self._uploadFiles()
         return message
-        # self._getAllFiles()
-        # self._submitFiles()
 
     @property
     def description(self):
@@ -38,7 +36,7 @@ class Upload(Command):
                 path, message = subscriber.recv_multipart()
             except zmq.ZMQError as e:
                 # File upload failed
-                f.close();
+                f.close()
                 os.remove(self.path)
                 return "Failed"
                 
@@ -51,20 +49,12 @@ class Upload(Command):
         message = "File Successfully Uploaded: %d Bytes" % totalSize
         return message
             
-    def _getAllFiles(self):
-        for root, dirs, files in os.walk(self.path):
-            for filename in files:
-                fullpath = os.path.join(root, filename)
-                with open(fullpath, 'rb') as file:
-                    file_content = file.read()
-                    self.files[fullpath] = file_content
-
-    def _submitFiles(self):
-        assign_request = master_pb2.AssignRequest(
-            count=len(self.files)
+    def _uploadFiles(self):
+        upload_request = master_pb2.UploadRequest(
+            file_path=self.path
             )
         
         with grpc.insecure_channel(self.master_addr) as channel:
             master_client = master_pb2_grpc.MasterNodeStub(channel)
-            master_client.Assign(assign_request)
+            master_client.Upload(upload_request)
         

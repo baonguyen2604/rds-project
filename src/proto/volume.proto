@@ -9,7 +9,11 @@ service VolumeNode {
 
     }
 
-    rpc UploadFile (stream UploadFileChunk) returns (UploadFileResponse) {
+    rpc GetUsedSpace (GetUsedSpaceRequest) returns (GetUsedSpaceResponse) {
+
+    }
+
+    rpc WriteFile (stream WriteFileChunk) returns (WriteFileResponse) {
 
     }
 }
@@ -22,17 +26,27 @@ message AllocateVolumeResponse {
 
 }
 
-message UploadFileChunk {
-    bytes content = 1;
+message GetUsedSpaceRequest {
+
 }
 
-enum UploadStatusCode {
-    unknown = 0;
-    success = 1;
-    failed = 2;
+message GetUsedSpaceResponse {
+    
 }
 
-message UploadFileResponse {
+message WriteFileChunk {
+    string path = 1;
+    bytes content = 2;
+    uint32 length = 3;
+}
+
+message WriteFileResponse {
+    enum WriteStatusCode {
+        unknown = 0;
+        success = 1;
+        failed = 2;
+    }
     string message = 1;
-    UploadStatusCode response_code = 2;
+    WriteStatusCode response_code = 2;
+    uint32 bytes_written = 3;
 }
