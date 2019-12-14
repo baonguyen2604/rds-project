@@ -16,9 +16,10 @@ class Upload(Command):
         self.files = {}
 
     def run(self):
-        self._downloadFiles()
-        self._getAllFiles()
-        self._submitFiles()
+        message = self._downloadFiles()
+        return message
+        # self._getAllFiles()
+        # self._submitFiles()
 
     @property
     def description(self):
@@ -28,9 +29,9 @@ class Upload(Command):
         context = zmq.Context()
         subscriber = context.socket(zmq.SUB)
         subscriber.setsockopt(zmq.SUBSCRIBE, self.path.encode())
-        subscriber.connect("tcp://127.0.0.1:5200")
+        subscriber.connect("tcp://127.0.0.1:%s" % FILE_PORT)
         totalSize = 0
-        f = open(self.path, "a")
+        f = open(self.path, "w")
         while True:
             path, message = subscriber.recv_multipart()
             f.write(message.decode())
@@ -38,6 +39,8 @@ class Upload(Command):
             totalSize += size
             if size == 0:
                 break
+        message = "File Successfully Uploaded: %d Bytes" % totalSize
+        return message
             
     def _getAllFiles(self):
         for root, dirs, files in os.walk(self.path):

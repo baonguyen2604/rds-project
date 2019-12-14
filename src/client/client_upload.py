@@ -6,7 +6,7 @@ CHUNK_SIZE = 1000
 
 def upload(args, context):
     publisher = context.socket(zmq.PUB)
-    publisher.bind("tcp://127.0.0.1:5200")
+    publisher.bind("tcp://127.0.0.1:%s" % UPLOAD_PORT)
     time.sleep(1)
     file = open(args.path, "rb")
     while True:
