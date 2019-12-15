@@ -68,7 +68,7 @@ class MasterServer(master_pb2_grpc.MasterNodeServicer):
         # remove the temp file
         os.remove(path)
 
-        # metadata
+        # insert into the metadata
         cursor = self.mydb.cursor()
         cursor.execute("USE filesystem")
         sql = "INSERT INTO %s (path, volumeId, size, date) VALUES (\"%s\", %s, %s, NOW())" % (self.name, path, "%d" % min_volume, "%d" % request.file_size)

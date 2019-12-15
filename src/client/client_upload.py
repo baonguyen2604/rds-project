@@ -4,9 +4,12 @@ import time
 UPLOAD_PORT = 5002
 CHUNK_SIZE = 1000
 
+# Uploads files in chunks to the main server
 def upload(args, context):
     publisher = context.socket(zmq.PUB)
-    publisher.bind("tcp://127.0.0.1:%s" % UPLOAD_PORT)
+
+    # Send files to main process in chunks
+    publisher.bind("tcp://34.237.189.42:%s" % UPLOAD_PORT)
     time.sleep(1)
     file = open(args.path, "rb")
     while True:

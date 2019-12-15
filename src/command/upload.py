@@ -18,7 +18,7 @@ class Upload(Command):
     def run(self):
         message = self._downloadFiles()
         if message == "Failed":
-            return
+            return message
         self._uploadFiles()
         return message
 
@@ -26,6 +26,7 @@ class Upload(Command):
     def description(self):
         print("Upload description")
     
+    # Download Files from the Client and write them to Disk
     def _downloadFiles(self):
         context = zmq.Context()
         subscriber = context.socket(zmq.SUB)
@@ -35,7 +36,7 @@ class Upload(Command):
         while True:
             try:
                 path, message = subscriber.recv_multipart()
-            except zmq.ZMQError as e:
+            except zmq.ZMQError as e: 
                 # File upload failed
                 f.close()
                 os.remove(self.path)
@@ -44,7 +45,7 @@ class Upload(Command):
             f.write(message.decode())
             size = len(message)
             self.fileSize+= size
-            if size == 0:
+            if size == 0: # Reached end of file
                 break
         f.close()
         message = "File Successfully Uploaded: %d Bytes" % self.fileSize

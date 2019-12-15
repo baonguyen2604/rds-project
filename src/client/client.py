@@ -8,6 +8,8 @@ SERVER_PORT = 5000
 def Client():
     context = zmq.Context()
     socket = context.socket(zmq.REQ)
+
+    # Connect to AWS Instance
     socket.connect("tcp://34.237.189.42:%s" % SERVER_PORT) 
     clientParser = parser.main_parser()
     args = clientParser.parse_args()
