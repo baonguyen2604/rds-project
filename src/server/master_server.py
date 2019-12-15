@@ -72,7 +72,6 @@ class MasterServer(master_pb2_grpc.MasterNodeServicer):
         cursor = self.mydb.cursor()
         cursor.execute("USE filesystem")
         sql = "INSERT INTO %s (path, volumeId, size, date) VALUES (\"%s\", %s, %s, NOW())" % (self.name, path, "%d" % min_volume, "%d" % request.file_size)
-        print(sql)
         cursor.execute(sql)
         cursor.close()
 

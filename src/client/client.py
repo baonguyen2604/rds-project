@@ -8,7 +8,7 @@ SERVER_PORT = 5000
 def Client():
     context = zmq.Context()
     socket = context.socket(zmq.REQ)
-    socket.connect("tcp://127.0.0.1:%s" % SERVER_PORT) 
+    socket.connect("tcp://34.237.189.42:%s" % SERVER_PORT) 
     clientParser = parser.main_parser()
     args = clientParser.parse_args()
     pArgs = pickle.dumps(args)

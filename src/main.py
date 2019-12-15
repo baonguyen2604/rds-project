@@ -3,6 +3,7 @@ import pickle
 from command.master import Master
 from command.upload import Upload
 from command.volume import Volume
+from command.ls import Ls
 
 SERVER_PORT = 5000
 
@@ -14,6 +15,8 @@ def DistributedFileSystem(args):
         command = Upload(args)
     elif args.command == 'volume':
         command = Volume(args)
+    elif args.command == 'ls':
+        command = Ls(args)
         
     resp = command.run()
 
