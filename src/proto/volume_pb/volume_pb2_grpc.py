@@ -20,6 +20,11 @@ class VolumeNodeStub(object):
         request_serializer=volume__pb2.AllocateVolumeRequest.SerializeToString,
         response_deserializer=volume__pb2.AllocateVolumeResponse.FromString,
         )
+    self.GetUsedSpace = channel.unary_unary(
+        '/volume_pb.VolumeNode/GetUsedSpace',
+        request_serializer=volume__pb2.GetUsedSpaceRequest.SerializeToString,
+        response_deserializer=volume__pb2.GetUsedSpaceResponse.FromString,
+        )
     self.WriteFile = channel.stream_unary(
         '/volume_pb.VolumeNode/WriteFile',
         request_serializer=volume__pb2.WriteFileChunk.SerializeToString,
@@ -33,6 +38,13 @@ class VolumeNodeServicer(object):
   """
 
   def AllocateVolume(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetUsedSpace(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -53,6 +65,11 @@ def add_VolumeNodeServicer_to_server(servicer, server):
           servicer.AllocateVolume,
           request_deserializer=volume__pb2.AllocateVolumeRequest.FromString,
           response_serializer=volume__pb2.AllocateVolumeResponse.SerializeToString,
+      ),
+      'GetUsedSpace': grpc.unary_unary_rpc_method_handler(
+          servicer.GetUsedSpace,
+          request_deserializer=volume__pb2.GetUsedSpaceRequest.FromString,
+          response_serializer=volume__pb2.GetUsedSpaceResponse.SerializeToString,
       ),
       'WriteFile': grpc.stream_unary_rpc_method_handler(
           servicer.WriteFile,

@@ -73,15 +73,14 @@ message VolumeListResponse {
 }
 
 message AddVolumeRequest {
-    uint32 volume_id = 1;
-    string volume_grpc = 2;
+    string volume_grpc = 1;
 }
 
 message AddVolumeResponse {
     enum AddVolumeResponseCode {
         unknown = 0;
         success = 1;
-        duplicate_id = 2;
     }
-    AddVolumeResponseCode response_code = 1;
+    uint32 volume_id = 1;
+    AddVolumeResponseCode response_code = 2;
 }

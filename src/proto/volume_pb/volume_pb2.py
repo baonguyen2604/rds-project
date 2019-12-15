@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='volume_pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0cvolume.proto\x12\tvolume_pb\"*\n\x15\x41llocateVolumeRequest\x12\x11\n\tvolume_id\x18\x01 \x01(\r\"\x18\n\x16\x41llocateVolumeResponse\"?\n\x0eWriteFileChunk\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\x0c\x12\x0e\n\x06length\x18\x03 \x01(\r\"\xb9\x01\n\x11WriteFileResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\x43\n\rresponse_code\x18\x02 \x01(\x0e\x32,.volume_pb.WriteFileResponse.WriteStatusCode\x12\x15\n\rbytes_written\x18\x03 \x01(\r\"7\n\x0fWriteStatusCode\x12\x0b\n\x07unknown\x10\x00\x12\x0b\n\x07success\x10\x01\x12\n\n\x06\x66\x61iled\x10\x02\x32\xaf\x01\n\nVolumeNode\x12W\n\x0e\x41llocateVolume\x12 .volume_pb.AllocateVolumeRequest\x1a!.volume_pb.AllocateVolumeResponse\"\x00\x12H\n\tWriteFile\x12\x19.volume_pb.WriteFileChunk\x1a\x1c.volume_pb.WriteFileResponse\"\x00(\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0cvolume.proto\x12\tvolume_pb\"*\n\x15\x41llocateVolumeRequest\x12\x11\n\tvolume_id\x18\x01 \x01(\r\"\x18\n\x16\x41llocateVolumeResponse\"\x15\n\x13GetUsedSpaceRequest\"=\n\x14GetUsedSpaceResponse\x12\x11\n\tvolume_id\x18\x01 \x01(\r\x12\x12\n\nused_space\x18\x02 \x01(\r\"?\n\x0eWriteFileChunk\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\x0c\x12\x0e\n\x06length\x18\x03 \x01(\r\"\xb9\x01\n\x11WriteFileResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\x43\n\rresponse_code\x18\x02 \x01(\x0e\x32,.volume_pb.WriteFileResponse.WriteStatusCode\x12\x15\n\rbytes_written\x18\x03 \x01(\r\"7\n\x0fWriteStatusCode\x12\x0b\n\x07unknown\x10\x00\x12\x0b\n\x07success\x10\x01\x12\n\n\x06\x66\x61iled\x10\x02\x32\x82\x02\n\nVolumeNode\x12W\n\x0e\x41llocateVolume\x12 .volume_pb.AllocateVolumeRequest\x1a!.volume_pb.AllocateVolumeResponse\"\x00\x12Q\n\x0cGetUsedSpace\x12\x1e.volume_pb.GetUsedSpaceRequest\x1a\x1f.volume_pb.GetUsedSpaceResponse\"\x00\x12H\n\tWriteFile\x12\x19.volume_pb.WriteFileChunk\x1a\x1c.volume_pb.WriteFileResponse\"\x00(\x01\x62\x06proto3')
 )
 
 
@@ -46,8 +46,8 @@ _WRITEFILERESPONSE_WRITESTATUSCODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=293,
-  serialized_end=348,
+  serialized_start=379,
+  serialized_end=434,
 )
 _sym_db.RegisterEnumDescriptor(_WRITEFILERESPONSE_WRITESTATUSCODE)
 
@@ -107,6 +107,68 @@ _ALLOCATEVOLUMERESPONSE = _descriptor.Descriptor(
 )
 
 
+_GETUSEDSPACEREQUEST = _descriptor.Descriptor(
+  name='GetUsedSpaceRequest',
+  full_name='volume_pb.GetUsedSpaceRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=97,
+  serialized_end=118,
+)
+
+
+_GETUSEDSPACERESPONSE = _descriptor.Descriptor(
+  name='GetUsedSpaceResponse',
+  full_name='volume_pb.GetUsedSpaceResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='volume_id', full_name='volume_pb.GetUsedSpaceResponse.volume_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='used_space', full_name='volume_pb.GetUsedSpaceResponse.used_space', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=120,
+  serialized_end=181,
+)
+
+
 _WRITEFILECHUNK = _descriptor.Descriptor(
   name='WriteFileChunk',
   full_name='volume_pb.WriteFileChunk',
@@ -147,8 +209,8 @@ _WRITEFILECHUNK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=97,
-  serialized_end=160,
+  serialized_start=183,
+  serialized_end=246,
 )
 
 
@@ -193,14 +255,16 @@ _WRITEFILERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=163,
-  serialized_end=348,
+  serialized_start=249,
+  serialized_end=434,
 )
 
 _WRITEFILERESPONSE.fields_by_name['response_code'].enum_type = _WRITEFILERESPONSE_WRITESTATUSCODE
 _WRITEFILERESPONSE_WRITESTATUSCODE.containing_type = _WRITEFILERESPONSE
 DESCRIPTOR.message_types_by_name['AllocateVolumeRequest'] = _ALLOCATEVOLUMEREQUEST
 DESCRIPTOR.message_types_by_name['AllocateVolumeResponse'] = _ALLOCATEVOLUMERESPONSE
+DESCRIPTOR.message_types_by_name['GetUsedSpaceRequest'] = _GETUSEDSPACEREQUEST
+DESCRIPTOR.message_types_by_name['GetUsedSpaceResponse'] = _GETUSEDSPACERESPONSE
 DESCRIPTOR.message_types_by_name['WriteFileChunk'] = _WRITEFILECHUNK
 DESCRIPTOR.message_types_by_name['WriteFileResponse'] = _WRITEFILERESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -218,6 +282,20 @@ AllocateVolumeResponse = _reflection.GeneratedProtocolMessageType('AllocateVolum
   # @@protoc_insertion_point(class_scope:volume_pb.AllocateVolumeResponse)
   })
 _sym_db.RegisterMessage(AllocateVolumeResponse)
+
+GetUsedSpaceRequest = _reflection.GeneratedProtocolMessageType('GetUsedSpaceRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETUSEDSPACEREQUEST,
+  '__module__' : 'volume_pb2'
+  # @@protoc_insertion_point(class_scope:volume_pb.GetUsedSpaceRequest)
+  })
+_sym_db.RegisterMessage(GetUsedSpaceRequest)
+
+GetUsedSpaceResponse = _reflection.GeneratedProtocolMessageType('GetUsedSpaceResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GETUSEDSPACERESPONSE,
+  '__module__' : 'volume_pb2'
+  # @@protoc_insertion_point(class_scope:volume_pb.GetUsedSpaceResponse)
+  })
+_sym_db.RegisterMessage(GetUsedSpaceResponse)
 
 WriteFileChunk = _reflection.GeneratedProtocolMessageType('WriteFileChunk', (_message.Message,), {
   'DESCRIPTOR' : _WRITEFILECHUNK,
@@ -241,8 +319,8 @@ _VOLUMENODE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=351,
-  serialized_end=526,
+  serialized_start=437,
+  serialized_end=695,
   methods=[
   _descriptor.MethodDescriptor(
     name='AllocateVolume',
@@ -254,9 +332,18 @@ _VOLUMENODE = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
+    name='GetUsedSpace',
+    full_name='volume_pb.VolumeNode.GetUsedSpace',
+    index=1,
+    containing_service=None,
+    input_type=_GETUSEDSPACEREQUEST,
+    output_type=_GETUSEDSPACERESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
     name='WriteFile',
     full_name='volume_pb.VolumeNode.WriteFile',
-    index=1,
+    index=2,
     containing_service=None,
     input_type=_WRITEFILECHUNK,
     output_type=_WRITEFILERESPONSE,

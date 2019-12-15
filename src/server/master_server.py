@@ -6,8 +6,11 @@ import proto.volume_pb.volume_pb2 as volume_pb2
 import proto.volume_pb.volume_pb2_grpc as volume_pb2_grpc
 import zmq
 import mysql.connector
+import sys
+import os
 
 FILE_PORT = 5002
+CHUNK_SIZE = 1000
 
 class MasterServer(master_pb2_grpc.MasterNodeServicer):
     def __init__(self, args=None):
@@ -28,7 +31,38 @@ class MasterServer(master_pb2_grpc.MasterNodeServicer):
             )
 
     def Upload(self, request, context):
-        pass
+        # assign volume for this upload request
+        min_used = sys.maxsize
+        min_volume = -1
+        for volume_id, grpc_addr in self.volumes:
+            with grpc.insecure_channel(grpc_addr) as channel:
+                volume_client = volume_pb2_grpc.VolumeNodeStub(channel)
+                resp = volume_client.GetUsedSpace(volume_pb2.GetUsedSpaceRequest())
+                if resp.used_space < min_used:
+                    min_used = resp.used_space
+                    min_volume = resp.volume_id
+        
+        # split file to chunks and send to volume node
+        path = request.file_path
+        file = open(path, "rb")
+        chunks_iterator = self._generate_chunks(file, path)
+
+        with grpc.insecure_channel(self.volumes[min_volume]) as channel:
+            volume_client = volume_pb2_grpc.VolumeNodeStub(channel)
+            resp = volume_client.WriteFile(chunks_iterator)
+        
+        # remove the temp file
+        os.remove(path)
+
+    def _generate_chunks(self, file, path):
+        while True:
+            data = file.read(CHUNK_SIZE)
+            chunk = volume_pb2.WriteFileChunk(
+                path=path,
+                bytes=data,
+                length=len(data)
+            )
+            yield chunk
             
 def serve(args):
     grpc_server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
