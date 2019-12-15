@@ -1,3 +1,4 @@
+# Base command class
 class Command():
     name = "BaseCommand"
     response = ""

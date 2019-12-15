@@ -27,8 +27,6 @@ class Volume(Command):
             process = mp.Process(target=create_volume.volume, args=(resp.volume_id, self.args))
             process.start()
 
-        
-
         return "Started volume at %s:%d and GRPC port = %s" %(self.args.ip, self.args.port, self.args.grpc_port)
 
 

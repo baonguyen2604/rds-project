@@ -4,7 +4,7 @@ import time
 UPLOAD_PORT = 5002
 CHUNK_SIZE = 1000
 
-# Uploads files in chunks to the main server
+# split the file into chunks and send it using a ZMQ pub socket
 def upload(args, context):
     publisher = context.socket(zmq.PUB)
 

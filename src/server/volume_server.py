@@ -11,6 +11,8 @@ class VolumeServer(volume_pb2_grpc.VolumeNodeServicer):
         self.dir_path = "/home/volumes/volume_%d" %self.id
         os.makedirs(self.dir_path, exist_ok=True)
 
+    # gRPC method to get the currently used space by this volume
+    # TODO: add logic to support delete/modify files
     def GetUsedSpace(self, request, context):
         resp = volume_pb2.GetUsedSpaceResponse(
             used_space=self.used_space,
@@ -18,6 +20,8 @@ class VolumeServer(volume_pb2_grpc.VolumeNodeServicer):
         )
         return resp
 
+    # gRPC method to write the file to this volume
+    # accepts a stream/iterable request so we can write sequentially
     def WriteFile(self, request_iterator, context):
         cur_path = ""
         cur_file = None

@@ -14,6 +14,7 @@ class Ls(Command):
             database='filesystem'
         )
 
+    # Connect to our mysql db to collect metadata, without having to contact volume
     def run(self):
         cursor = self.mydb.cursor()
         cursor.execute("USE filesystem")

@@ -5,9 +5,6 @@ package volume_pb;
 //////////////////////////////////////////////////
 
 service VolumeNode {
-    rpc AllocateVolume (AllocateVolumeRequest) returns (AllocateVolumeResponse) {
-
-    }
 
     rpc GetUsedSpace (GetUsedSpaceRequest) returns (GetUsedSpaceResponse) {
 
@@ -16,14 +13,6 @@ service VolumeNode {
     rpc WriteFile (stream WriteFileChunk) returns (WriteFileResponse) {
 
     }
-}
-
-message AllocateVolumeRequest {
-    uint32 volume_id = 1;
-}
-
-message AllocateVolumeResponse {
-
 }
 
 message GetUsedSpaceRequest {

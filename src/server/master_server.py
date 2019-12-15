@@ -36,6 +36,9 @@ class MasterServer(master_pb2_grpc.MasterNodeServicer):
                 + "path VARCHAR(255), volumeId INT, size INT, date DATETIME)")
         mycursor.close()
 
+    # gRPC method to inform master of a newly added volume
+    # master will returns an incrementing volume id 
+    # TODO: better id generation scheme to take into account revived volumes
     def AddVolume(self, request, context):
         self.volumes[self.cur_volume_id] = request.volume_grpc
         self.cur_volume_id += 1
@@ -44,8 +47,10 @@ class MasterServer(master_pb2_grpc.MasterNodeServicer):
             volume_id=(self.cur_volume_id - 1)
         )
 
+    # gRPC method to upload a file to a volume
+    # assign volume by least used policy (i.e volume with lowest used space will be chosen)
     def Upload(self, request, context):
-        # assign volume for this upload request
+        # assign volume for this upload request based on used space
         min_used = sys.maxsize
         min_volume = -1
         for volume_id, grpc_addr in self.volumes.items():
@@ -82,6 +87,7 @@ class MasterServer(master_pb2_grpc.MasterNodeServicer):
         )
         return resp
 
+    # helper method to generate WriteFileChunk iterable request for gRPC method WriteFile in volume
     def _generate_chunks(self, file, path):
         while True:
             data = file.read(CHUNK_SIZE)

@@ -15,6 +15,9 @@ class Upload(Command):
         self.master_addr = args.master
         self.fileSize = 0
 
+    # first we download and store the files temporarily
+    # then we request an upload from master with the path and size
+    # master will take care of assigning the appropriate volume and send the file to that volume
     def run(self):
         message = self._downloadFiles()
         if message == "Failed":
@@ -26,7 +29,7 @@ class Upload(Command):
     def description(self):
         print("Upload description")
     
-    # Download Files from the Client and write them to Disk
+    # temporary download and store the file
     def _downloadFiles(self):
         context = zmq.Context()
         subscriber = context.socket(zmq.SUB)
@@ -50,7 +53,8 @@ class Upload(Command):
         f.close()
         message = "File Successfully Uploaded: %d Bytes" % self.fileSize
         return message
-            
+    
+    # request master an upload with the current file path and size
     def _uploadFiles(self):
         upload_request = master_pb2.UploadRequest(
             file_size=self.fileSize,

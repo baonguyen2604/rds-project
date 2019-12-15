@@ -1,5 +1,6 @@
 import argparse
 
+# Command line arguments parser
 def main_parser():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest='command')

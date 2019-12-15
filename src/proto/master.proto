@@ -5,15 +5,7 @@ package master_pb;
 //////////////////////////////////////////////
 
 service MasterNode {
-    rpc LookupVolume (LookupVolumeRequest) returns (LookupVolumeResponse) {
-
-    }
-
     rpc Upload (UploadRequest) returns (UploadResponse) {
-
-    }
-
-    rpc VolumeList (VolumeListRequest) returns (VolumeListResponse) {
 
     }
 
@@ -23,33 +15,6 @@ service MasterNode {
 }
 
 //////////////////////////////////////////////
-message KeepConnectedRequest {
-    string name = 1;
-}
-
-message VolumeLocation {
-    string url = 1;
-    string public_url = 2;
-}
-
-message LookupVolumeRequest {
-    repeated string volume_ids = 1;
-}
-
-message LookupVolumeResponse {
-    message VolumeIdLocation {
-        string volume_id = 1;
-        repeated Location locations = 2;
-        string error = 3;
-    }
-    repeated VolumeIdLocation volume_id_locations = 1;
-}
-
-message Location {
-    string url = 1;
-    string public_url = 2;
-}
-
 message UploadRequest {
     string file_path = 1;
     bytes content = 2;
@@ -63,14 +28,6 @@ message UploadResponse {
         failed = 2;
     }
     uint32 volume_id = 1;
-}
-
-message VolumeListRequest {
-
-}
-
-message VolumeListResponse {
-    
 }
 
 message AddVolumeRequest {

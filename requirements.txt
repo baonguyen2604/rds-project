@@ -1,0 +1,5 @@
+grpcio
+grpcio-tools
+pyzmq
+mysql
+mysql-connector-python
