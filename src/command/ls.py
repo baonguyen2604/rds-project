@@ -23,7 +23,10 @@ class Ls(Command):
         message = ''
         for x in result:
             message+= str(x) + "\n"
+        cursor.close()
+        self.mydb.close()
         return message
+        
 
 
         

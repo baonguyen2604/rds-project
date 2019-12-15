@@ -9,7 +9,7 @@ def upload(args, context):
     publisher = context.socket(zmq.PUB)
 
     # Send files to main process in chunks
-    publisher.bind("tcp://34.237.189.42:%s" % UPLOAD_PORT)
+    publisher.bind("tcp://127.0.0.1:%s" % UPLOAD_PORT)
     time.sleep(1)
     file = open(args.path, "rb")
     while True:
