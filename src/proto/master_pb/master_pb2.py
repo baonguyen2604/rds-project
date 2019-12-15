@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='master_pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0cmaster.proto\x12\tmaster_pb\"$\n\x14KeepConnectedRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"1\n\x0eVolumeLocation\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x12\n\npublic_url\x18\x02 \x01(\t\")\n\x13LookupVolumeRequest\x12\x12\n\nvolume_ids\x18\x01 \x03(\t\"\xc3\x01\n\x14LookupVolumeResponse\x12M\n\x13volume_id_locations\x18\x01 \x03(\x0b\x32\x30.master_pb.LookupVolumeResponse.VolumeIdLocation\x1a\\\n\x10VolumeIdLocation\x12\x11\n\tvolume_id\x18\x01 \x01(\t\x12&\n\tlocations\x18\x02 \x03(\x0b\x32\x13.master_pb.Location\x12\r\n\x05\x65rror\x18\x03 \x01(\t\"+\n\x08Location\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x12\n\npublic_url\x18\x02 \x01(\t\"3\n\rUploadRequest\x12\x11\n\tfile_path\x18\x01 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\x0c\"_\n\x0eUploadResponse\x12\x11\n\tvolume_id\x18\x01 \x01(\r\":\n\x12UploadResponseCode\x12\x0b\n\x07unknown\x10\x00\x12\x0b\n\x07success\x10\x01\x12\n\n\x06\x66\x61iled\x10\x02\"\x13\n\x11VolumeListRequest\"\x14\n\x12VolumeListResponse\"\'\n\x10\x41\x64\x64VolumeRequest\x12\x13\n\x0bvolume_grpc\x18\x01 \x01(\t\"\xa4\x01\n\x11\x41\x64\x64VolumeResponse\x12\x11\n\tvolume_id\x18\x01 \x01(\r\x12I\n\rresponse_code\x18\x02 \x01(\x0e\x32\x32.master_pb.AddVolumeResponse.AddVolumeResponseCode\"1\n\x15\x41\x64\x64VolumeResponseCode\x12\x0b\n\x07unknown\x10\x00\x12\x0b\n\x07success\x10\x01\x32\xb7\x02\n\nMasterNode\x12Q\n\x0cLookupVolume\x12\x1e.master_pb.LookupVolumeRequest\x1a\x1f.master_pb.LookupVolumeResponse\"\x00\x12?\n\x06Upload\x12\x18.master_pb.UploadRequest\x1a\x19.master_pb.UploadResponse\"\x00\x12K\n\nVolumeList\x12\x1c.master_pb.VolumeListRequest\x1a\x1d.master_pb.VolumeListResponse\"\x00\x12H\n\tAddVolume\x12\x1b.master_pb.AddVolumeRequest\x1a\x1c.master_pb.AddVolumeResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0cmaster.proto\x12\tmaster_pb\"$\n\x14KeepConnectedRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"1\n\x0eVolumeLocation\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x12\n\npublic_url\x18\x02 \x01(\t\")\n\x13LookupVolumeRequest\x12\x12\n\nvolume_ids\x18\x01 \x03(\t\"\xc3\x01\n\x14LookupVolumeResponse\x12M\n\x13volume_id_locations\x18\x01 \x03(\x0b\x32\x30.master_pb.LookupVolumeResponse.VolumeIdLocation\x1a\\\n\x10VolumeIdLocation\x12\x11\n\tvolume_id\x18\x01 \x01(\t\x12&\n\tlocations\x18\x02 \x03(\x0b\x32\x13.master_pb.Location\x12\r\n\x05\x65rror\x18\x03 \x01(\t\"+\n\x08Location\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x12\n\npublic_url\x18\x02 \x01(\t\"F\n\rUploadRequest\x12\x11\n\tfile_path\x18\x01 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\x0c\x12\x11\n\tfile_size\x18\x03 \x01(\r\"_\n\x0eUploadResponse\x12\x11\n\tvolume_id\x18\x01 \x01(\r\":\n\x12UploadResponseCode\x12\x0b\n\x07unknown\x10\x00\x12\x0b\n\x07success\x10\x01\x12\n\n\x06\x66\x61iled\x10\x02\"\x13\n\x11VolumeListRequest\"\x14\n\x12VolumeListResponse\"\'\n\x10\x41\x64\x64VolumeRequest\x12\x13\n\x0bvolume_grpc\x18\x01 \x01(\t\"\xa4\x01\n\x11\x41\x64\x64VolumeResponse\x12\x11\n\tvolume_id\x18\x01 \x01(\r\x12I\n\rresponse_code\x18\x02 \x01(\x0e\x32\x32.master_pb.AddVolumeResponse.AddVolumeResponseCode\"1\n\x15\x41\x64\x64VolumeResponseCode\x12\x0b\n\x07unknown\x10\x00\x12\x0b\n\x07success\x10\x01\x32\xb7\x02\n\nMasterNode\x12Q\n\x0cLookupVolume\x12\x1e.master_pb.LookupVolumeRequest\x1a\x1f.master_pb.LookupVolumeResponse\"\x00\x12?\n\x06Upload\x12\x18.master_pb.UploadRequest\x1a\x19.master_pb.UploadResponse\"\x00\x12K\n\nVolumeList\x12\x1c.master_pb.VolumeListRequest\x1a\x1d.master_pb.VolumeListResponse\"\x00\x12H\n\tAddVolume\x12\x1b.master_pb.AddVolumeRequest\x1a\x1c.master_pb.AddVolumeResponse\"\x00\x62\x06proto3')
 )
 
 
@@ -46,8 +46,8 @@ _UPLOADRESPONSE_UPLOADRESPONSECODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=492,
-  serialized_end=550,
+  serialized_start=511,
+  serialized_end=569,
 )
 _sym_db.RegisterEnumDescriptor(_UPLOADRESPONSE_UPLOADRESPONSECODE)
 
@@ -68,8 +68,8 @@ _ADDVOLUMERESPONSE_ADDVOLUMERESPONSECODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=752,
-  serialized_end=801,
+  serialized_start=771,
+  serialized_end=820,
 )
 _sym_db.RegisterEnumDescriptor(_ADDVOLUMERESPONSE_ADDVOLUMERESPONSECODE)
 
@@ -308,6 +308,13 @@ _UPLOADREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='file_size', full_name='master_pb.UploadRequest.file_size', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -321,7 +328,7 @@ _UPLOADREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=402,
-  serialized_end=453,
+  serialized_end=472,
 )
 
 
@@ -352,8 +359,8 @@ _UPLOADRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=455,
-  serialized_end=550,
+  serialized_start=474,
+  serialized_end=569,
 )
 
 
@@ -376,8 +383,8 @@ _VOLUMELISTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=552,
-  serialized_end=571,
+  serialized_start=571,
+  serialized_end=590,
 )
 
 
@@ -400,8 +407,8 @@ _VOLUMELISTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=573,
-  serialized_end=593,
+  serialized_start=592,
+  serialized_end=612,
 )
 
 
@@ -431,8 +438,8 @@ _ADDVOLUMEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=595,
-  serialized_end=634,
+  serialized_start=614,
+  serialized_end=653,
 )
 
 
@@ -470,8 +477,8 @@ _ADDVOLUMERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=637,
-  serialized_end=801,
+  serialized_start=656,
+  serialized_end=820,
 )
 
 _LOOKUPVOLUMERESPONSE_VOLUMEIDLOCATION.fields_by_name['locations'].message_type = _LOCATION
@@ -586,8 +593,8 @@ _MASTERNODE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=804,
-  serialized_end=1115,
+  serialized_start=823,
+  serialized_end=1134,
   methods=[
   _descriptor.MethodDescriptor(
     name='LookupVolume',

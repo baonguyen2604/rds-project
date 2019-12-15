@@ -8,6 +8,7 @@ import zmq
 import mysql.connector
 import sys
 import os
+from datetime import datetime
 
 FILE_PORT = 5002
 CHUNK_SIZE = 1000
@@ -18,6 +19,22 @@ class MasterServer(master_pb2_grpc.MasterNodeServicer):
         
         # map of volume_id to its grpc_port
         self.volumes = {}
+        self.mydb = mysql.connector.connect(
+            host="localhost",
+            user="root",
+        )
+        self.name = args.name
+        self.createDB(self.name)
+
+    # Create Metadata Database
+    def createDB(self, name):
+        mycursor = self.mydb.cursor()
+        mycursor.execute("CREATE DATABASE IF NOT EXISTS filesystem")
+        mycursor.execute("USE filesystem")
+        mycursor.execute("DROP TABLE IF EXISTS %s" % name)
+        mycursor.execute("CREATE TABLE %s (" % name
+                + "path VARCHAR(255), volumeId INT, size INT, date DATETIME)")
+        mycursor.close()
 
     def AddVolume(self, request, context):
         if request.volume_id in self.volumes:
@@ -41,7 +58,7 @@ class MasterServer(master_pb2_grpc.MasterNodeServicer):
                 if resp.used_space < min_used:
                     min_used = resp.used_space
                     min_volume = resp.volume_id
-        
+       
         # split file to chunks and send to volume node
         path = request.file_path
         file = open(path, "rb")
@@ -53,6 +70,24 @@ class MasterServer(master_pb2_grpc.MasterNodeServicer):
         
         # remove the temp file
         os.remove(path)
+
+        #tmp
+        min_volume = 0
+
+        cursor = self.mydb.cursor()
+        cursor.execute("USE filesystem")
+        sql = "INSERT INTO %s (path, volumeId, size, date) VALUES (\"%s\", %s, %s, NOW())" % (self.name, path, "%d" % min_volume, "%d" % request.file_size)
+        print(sql)
+        cursor.execute(sql)
+        cursor.close()
+
+        self.mydb.commit()
+
+        resp = master_pb2.UploadResponse(
+            volume_id=0
+        )
+
+        return resp
 
     def _generate_chunks(self, file, path):
         while True:
@@ -72,14 +107,3 @@ def serve(args):
     grpc_server.start()
     grpc_server.wait_for_termination()
 
-def createDB(name):
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-    )
-    mycursor = mydb.cursor()
-    mycursor.execute("CREATE DATABASE IF NOT EXISTS filesystem")
-    mycursor.execute("USE filesystem")
-    mycursor.execute("DROP TABLE IF EXISTS %s" % name)
-    mycursor.execute("CREATE TABLE %s (id INT AUTO_INCREMENT PRIMARY KEY, " % name
-            + "path VARCHAR(255), volumeId INT, size INT)")

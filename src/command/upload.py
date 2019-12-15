@@ -13,9 +13,12 @@ class Upload(Command):
         Command.__init__(self, args)
         self.path = args.path
         self.master_addr = args.master
+        self.fileSize = 0
 
     def run(self):
         message = self._downloadFiles()
+        if message == "Failed":
+            return
         self._uploadFiles()
         return message
 
@@ -28,9 +31,7 @@ class Upload(Command):
         subscriber = context.socket(zmq.SUB)
         subscriber.setsockopt(zmq.SUBSCRIBE, self.path.encode())
         subscriber.connect("tcp://127.0.0.1:%s" % FILE_PORT)
-        totalSize = 0
         f = open(self.path, "w")
-
         while True:
             try:
                 path, message = subscriber.recv_multipart()
@@ -42,16 +43,17 @@ class Upload(Command):
                 
             f.write(message.decode())
             size = len(message)
-            totalSize += size
+            self.fileSize+= size
             if size == 0:
                 break
         f.close()
-        message = "File Successfully Uploaded: %d Bytes" % totalSize
+        message = "File Successfully Uploaded: %d Bytes" % self.fileSize
         return message
             
     def _uploadFiles(self):
         upload_request = master_pb2.UploadRequest(
-            file_path=self.path
+            file_path=self.path# ,
+            # file_size=self.fileSize
             )
         
         with grpc.insecure_channel(self.master_addr) as channel:

@@ -53,6 +53,7 @@ message Location {
 message UploadRequest {
     string file_path = 1;
     bytes content = 2;
+    uint32 file_size = 3;
 }
 
 message UploadResponse {
