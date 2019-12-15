@@ -52,9 +52,9 @@ class Upload(Command):
             
     def _uploadFiles(self):
         upload_request = master_pb2.UploadRequest(
-            file_path=self.path# ,
-            # file_size=self.fileSize
-            )
+            file_size=self.fileSize,
+            file_path=self.path
+        )
         
         with grpc.insecure_channel(self.master_addr) as channel:
             master_client = master_pb2_grpc.MasterNodeStub(channel)

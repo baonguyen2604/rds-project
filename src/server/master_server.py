@@ -16,7 +16,7 @@ CHUNK_SIZE = 1000
 class MasterServer(master_pb2_grpc.MasterNodeServicer):
     def __init__(self, args=None):
         self.options = {}
-        
+        self.cur_volume_id = 0
         # map of volume_id to its grpc_port
         self.volumes = {}
         self.mydb = mysql.connector.connect(
@@ -37,21 +37,18 @@ class MasterServer(master_pb2_grpc.MasterNodeServicer):
         mycursor.close()
 
     def AddVolume(self, request, context):
-        if request.volume_id in self.volumes:
-            return master_pb2.AddVolumeResponse(
-                response_code=master_pb2.AddVolumeResponse.AddVolumeResponseCode.Value('duplicate_id')
-            )
-        else:
-            self.volumes[request.volume_id] = request.volume_grpc
-            return master_pb2.AddVolumeResponse(
-                response_code=master_pb2.AddVolumeResponse.AddVolumeResponseCode.Value('success')
-            )
+        self.volumes[self.cur_volume_id] = request.volume_grpc
+        self.cur_volume_id += 1
+        return master_pb2.AddVolumeResponse(
+            response_code=master_pb2.AddVolumeResponse.AddVolumeResponseCode.Value('success'),
+            volume_id=(self.cur_volume_id - 1)
+        )
 
     def Upload(self, request, context):
         # assign volume for this upload request
         min_used = sys.maxsize
         min_volume = -1
-        for volume_id, grpc_addr in self.volumes:
+        for volume_id, grpc_addr in self.volumes.items():
             with grpc.insecure_channel(grpc_addr) as channel:
                 volume_client = volume_pb2_grpc.VolumeNodeStub(channel)
                 resp = volume_client.GetUsedSpace(volume_pb2.GetUsedSpaceRequest())
@@ -71,9 +68,7 @@ class MasterServer(master_pb2_grpc.MasterNodeServicer):
         # remove the temp file
         os.remove(path)
 
-        #tmp
-        min_volume = 0
-
+        # metadata
         cursor = self.mydb.cursor()
         cursor.execute("USE filesystem")
         sql = "INSERT INTO %s (path, volumeId, size, date) VALUES (\"%s\", %s, %s, NOW())" % (self.name, path, "%d" % min_volume, "%d" % request.file_size)
@@ -84,9 +79,8 @@ class MasterServer(master_pb2_grpc.MasterNodeServicer):
         self.mydb.commit()
 
         resp = master_pb2.UploadResponse(
-            volume_id=0
+            volume_id=min_volume
         )
-
         return resp
 
     def _generate_chunks(self, file, path):
@@ -94,9 +88,11 @@ class MasterServer(master_pb2_grpc.MasterNodeServicer):
             data = file.read(CHUNK_SIZE)
             chunk = volume_pb2.WriteFileChunk(
                 path=path,
-                bytes=data,
+                content=data,
                 length=len(data)
             )
+            if not data:
+                break
             yield chunk
             
 def serve(args):
